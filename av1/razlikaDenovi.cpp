@@ -2,8 +2,7 @@
 // Created by krstevkoki on 2/20/17.
 //
 #include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <iomanip> // formatted output for the date
 
 using namespace std;
 
