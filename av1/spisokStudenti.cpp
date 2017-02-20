@@ -25,10 +25,10 @@ void sort(student students[], int n) {
     }
 }
 
-void first_uppercase(char *first_name) {
-    *first_name = toupper(*first_name);
-    while (*(++first_name) != '\0')
-        *first_name = tolower(*first_name);
+void first_uppercase(char *string) {
+    *string = toupper(*string);
+    while (*(++string) != '\0')
+        *string = tolower(*string);
 
 }
 
