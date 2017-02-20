@@ -21,7 +21,7 @@ struct country {
     pres president;
     capital_city city;
     int population;
-};
+} countries[100];
 
 int maxPopulation(country *countries, int n){
     int max_i = 0;
@@ -35,7 +35,7 @@ int maxPopulation(country *countries, int n){
     return max_i;
 }
 
-void read(country *countries, int n) {
+void read(int n) {
     for (int i = 0; i < n; ++i) {
         cin >> countries[i].name;
         cin >> countries[i].president.first_name;
@@ -47,7 +47,7 @@ void read(country *countries, int n) {
     }
 }
 
-void print(country countries[], int n) {
+void print(int n) {
     for (int i = 0; i < n; ++i) {
         cout << countries[i].name << "\t";
         cout << countries[i].president.first_name << "\t";
@@ -63,10 +63,9 @@ int main() {
     int MAX;
     cout<<"Broj na drzavi: ";
     cin >> MAX;
-    country countries[MAX];
-    read(countries, MAX);
+    read(MAX);
     int index = maxPopulation(countries, MAX);
-    print(countries, MAX);
+    print(MAX);
     cout<<countries[index].president.first_name<<" "<<countries[index].president.last_name<<endl;
     return 0;
 }
