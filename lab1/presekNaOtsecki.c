@@ -18,7 +18,6 @@ typedef struct otsecka {
 int onSegment(tocka p, tocka q, tocka r) {
     if (q.x <= fmax(p.x, r.x) && q.x >= fmin(p.x, r.x) && q.y <= fmax(p.y, r.y) && q.y >= fmin(p.y, r.y))
         return 1;
-
     return 0;
 }
 
