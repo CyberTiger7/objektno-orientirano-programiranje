@@ -6,8 +6,8 @@
 
 typedef struct tocka {
     // vasiot kod ovde
-    int x;
-    int y;
+    float x;
+    float y;
 } tocka;
 
 typedef struct otsecka {
@@ -60,14 +60,14 @@ int se_secat(otsecka o1, otsecka o2) {
 }
 
 int main() {
-    int x1, y1, x2, y2;
-    scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+    float x1, y1, x2, y2;
+    scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
 
     tocka t1 = {x1, y1};
     tocka t2 = {x2, y2};
     otsecka o1 = {t1, t2};
 
-    scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+    scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
 
     tocka t3 = {x1, y1};
     tocka t4 = {x2, y2};
