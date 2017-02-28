@@ -8,13 +8,9 @@ using namespace std;
 class Krug {
 private:
     float radius;
-    const float PI = 3.14;
+    const float Pi = 3.14;
 public:
-    Krug() {
-        radius = 0;
-    }
-
-    Krug(float r) {
+    Krug(float r = 0.0, const float Pi = 3.14) {
         radius = r;
     }
 
@@ -23,11 +19,11 @@ public:
     }
 
     float const perimetar() {
-        return 2 * radius * PI;
+        return 2 * radius * Pi;
     }
 
     float const plostina() {
-        return radius * radius * PI;
+        return radius * radius * Pi;
     }
 
     int ednakvi() {
@@ -41,7 +37,7 @@ public:
 int main() {
     float r;
     cin >> r;
-    if (r >= 0) {
+    if (r >= 0.0) {
         //instanciraj objekt od klasata Krug cij radius e vrednosta procitana od tastatura
         Krug k(r);
         cout << k.perimetar() << endl;
