@@ -10,7 +10,11 @@ private:
     float radius;
     const float Pi = 3.14;
 public:
-    Krug(float r = 0.0, const float Pi = 3.14) {
+    Krug() {
+        radius = 0;
+    }
+
+    Krug(float r) {
         radius = r;
     }
 
