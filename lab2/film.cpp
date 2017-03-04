@@ -25,23 +25,6 @@ public:
         year = y;
     }
 
-    // set functions
-    void set_name(const char *ime) {
-        strcpy(name, ime);
-    }
-
-    void set_producer(const char *reziser) {
-        strcpy(producer, reziser);
-    }
-
-    void set_genre(const char *zanr) {
-        strcpy(genre, zanr);
-    }
-
-    void set_year(const int godina) {
-        year = godina;
-    }
-
     // get functions
 
     char const *get_name() {
@@ -87,10 +70,7 @@ int main() {
         cin >> zanr;
         cin >> godina;
         //da se kreira soodveten objekt
-        movies[i].set_name(ime);
-        movies[i].set_producer(reziser);
-        movies[i].set_genre(zanr);
-        movies[i].set_year(godina);
+        movies[i] = Film(ime, reziser, zanr,godina);
 
     }
     int godina;
