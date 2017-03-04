@@ -50,7 +50,7 @@ void pecati_po_godina(Film *f, int n, int godina) {
             cout << "Ime: " << f[i].get_name() << endl;
             cout << "Reziser: " << f[i].get_producer() << endl;
             cout << "Zanr: " << f[i].get_genre() << endl;
-            cout << "Godina: " << f[i].get_year()<< endl;
+            cout << "Godina: " << f[i].get_year() << endl;
         }
     }
 }
@@ -70,7 +70,7 @@ int main() {
         cin >> zanr;
         cin >> godina;
         //da se kreira soodveten objekt
-        movies[i] = Film(ime, reziser, zanr,godina);
+        movies[i] = Film(ime, reziser, zanr, godina);
 
     }
     int godina;
