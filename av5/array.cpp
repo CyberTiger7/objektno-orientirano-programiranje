@@ -32,14 +32,17 @@ public:
     }
 
     Array &operator=(const Array &p) {
-        this->size = p.size;
-        this->capacity = p.capacity;
-        delete[] pole;
-        pole = new int[capacity];
-        for (int i = 0; i < size; ++i) {
-            pole[i] = p.pole[i];
+        if (this != &p) {
+            this->size = p.size;
+            this->capacity = p.capacity;
+            delete[] pole;
+            pole = new int[capacity];
+            for (int i = 0; i < size; ++i) {
+                pole[i] = p.pole[i];
+            }
         }
         return *this;
+
     }
 
     void add(int n) {
