@@ -7,7 +7,7 @@
 using namespace std;
 
 enum zanr {
-    AKCIJA, KOMEDIJA, DRAMA
+    AKCIJA = 0, KOMEDIJA, DRAMA
 };
 
 class Film {
@@ -45,6 +45,14 @@ public:
         delete[] name;
     }
 
+    const int getMovieSize() {
+        return movie_size;
+    }
+
+    const zanr getMovieGenre() {
+        return z;
+    }
+
     const void pecati() {
         cout << movie_size << "MB-\"" << name << "\"" << endl;
     }
@@ -57,8 +65,37 @@ private:
     int num_movies;
     int dvd_capacity;
 public:
-    DVD(int dvd_capacity, int num_movies, Film *movies) {
+    DVD(int dvd_capacity = 0, int num_movies = 0, Film *movies = 0) {
+        this->dvd_capacity = dvd_capacity;
+        this->num_movies = num_movies;
+        for (int i = 0; i < num_movies; ++i) {
+            this->movies[i] = movies[i];
+        }
+    }
 
+    ~DVD() {}
+
+    DVD &dodadiFilm(Film f) {
+        if ((f.getMovieSize() <= dvd_capacity) && (num_movies < 5)) {
+            dvd_capacity -= f.getMovieSize();
+            movies[num_movies++] = f;
+        }
+        return *this;
+    }
+
+    Film getFilm(int i) {
+        return movies[i];
+    }
+
+    const int getBroj() {
+        return num_movies;
+    }
+
+    void pecatiFilmoviDrugZanr(zanr z) {
+        for (int i = 0; i < num_movies; ++i) {
+            if (movies[i].getMovieGenre() != z)
+                movies[i].pecati();
+        }
     }
 };
 
@@ -116,7 +153,6 @@ int main() {
         }
         cin >> kojzanr;
         omileno.pecatiFilmoviDrugZanr((zanr) kojzanr);
-
     } else if (testCase == 5) {
         cout << "===== Testiranje na metodot pecatiFilmoviDrugZanr() od klasata DVD ======" << endl;
         DVD omileno(50);
