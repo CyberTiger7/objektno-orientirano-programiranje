@@ -117,12 +117,6 @@ public:
     }
 
     Picerija &dodadi(Pica p) {
-        Pica *temp = new Pica[num_pizzas + 1];
-        for (int i = 0; i < num_pizzas; ++i) {
-            temp[i] = pizzas[i];
-        }
-        delete[] pizzas;
-        pizzas = temp;
         int flag = 1;
         for (int i = 0; i < num_pizzas; ++i) {
             if (pizzas[i].istiSe(p)) {
@@ -131,6 +125,12 @@ public:
             }
         }
         if (flag) {
+        	Pica *temp = new Pica[num_pizzas + 1];
+	        for (int i = 0; i < num_pizzas; ++i) {
+	            temp[i] = pizzas[i];
+	        }
+	        delete[] pizzas;
+	        pizzas = temp;
             pizzas[num_pizzas++] = p;
         }
         return *this;
