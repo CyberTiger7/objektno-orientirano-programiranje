@@ -100,4 +100,3 @@ int main() {
     printf("%d\n", maxWeek(&employees[n / 2]));
     return 0;
 }
-
