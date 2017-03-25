@@ -40,8 +40,7 @@ void najgolemKapacitet(SkiCenter *sc, int n) {
             if (sc[i].num_skilift > sc[i + 1].num_skilift) {
                 max = capacity[i];
                 index = i;
-            }
-            else {
+            } else {
                 max = capacity[i + 1];
                 index = i + 1;
             }
