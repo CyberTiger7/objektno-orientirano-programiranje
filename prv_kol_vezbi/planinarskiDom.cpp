@@ -144,10 +144,8 @@ public:
     }
 
     void presmetajDnevenPrestoj(int &den, int &mesec, int &cena) {
-        if (mesec < 1 || mesec > 12)
+        if ((mesec < 1 || mesec > 12) || (den < 1 || den > 31))
             throw 10;
-        else if (den < 1 || den > 31)
-            throw 11;
         else {
             if (mesec < 4 || mesec > 10)
                 cena = price_per_season[1] + 20;
