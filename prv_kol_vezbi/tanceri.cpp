@@ -33,7 +33,7 @@ void tancuvanje(Tancer *t, int n, char *country) {
 
 int main() {
     int n;
-    char country[10];
+    char country[11];
     Tancer dancers[5];
     cin >> n;
     for (int i = 0; i < n; i++) {
