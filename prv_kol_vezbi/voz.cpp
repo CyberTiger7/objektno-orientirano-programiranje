@@ -2,8 +2,8 @@
 // Created by krstevkoki on 3/29/17.
 //
 
-#include<iostream>
-#include<cstring>
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -151,8 +151,6 @@ public:
                 cout << "Brojot na patnici od 2-ra klasa koi ostanale bez mesto e: " << second_class_left << endl;
             }
         }
-
-
     }
 };
 
