@@ -1,2 +1,2 @@
-# Object-Oriented **C++ Projects**
-## **FINKI** Laboratory Work and other exercises.
+# Object-Oriented **_C++ Projects_**
+## **_FINKI_** Laboratory Work and other exercises.
