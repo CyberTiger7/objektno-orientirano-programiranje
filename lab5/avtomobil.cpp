@@ -13,45 +13,54 @@ private:
     int *registration;
     int maxSpeed;
 public:
-    Automobile(char *name = "", const int *registration = 0, int maxSpeed = 0) {
+    Automobile() {
+        this->name = NULL;
+        this->registration = NULL;
+        this->maxSpeed = 0;
+    }
+
+    Automobile(const char *name, const int *registration, const int maxSpeed) {
         this->maxSpeed = maxSpeed;
-        this->registration = new int[5];
-        if (registration == 0) {
-            for (int i = 0; i < 5; ++i) {
-                this->registration[i] = 0;
-            }
-        } else {
-            for (int i = 0; i < 5; ++i) {
-                this->registration[i] = registration[i];
-            }
-        }
         this->name = new char[strlen(name) + 1];
         strcpy(this->name, name);
+        this->registration = new int[5];
+        for (int i = 0; i < 5; ++i) {
+            this->registration[i] = registration[i];
+        }
     }
 
     Automobile(const Automobile &a) {
         this->maxSpeed = a.maxSpeed;
+        this->name = new char[strlen(a.name) + 1];
+        strcpy(this->name, a.name);
         this->registration = new int[5];
         for (int i = 0; i < 5; ++i) {
             this->registration[i] = a.registration[i];
         }
-        this->name = new char[strlen(a.name) + 1];
-        strcpy(this->name, a.name);
     }
 
     Automobile &operator=(const Automobile &a) {
         if (this != &a) {
             this->maxSpeed = a.maxSpeed;
+            delete[] this->name;
+            this->name = new char[strlen(a.name) + 1];
+            strcpy(this->name, a.name);
             delete[] this->registration;
             this->registration = new int[5];
             for (int i = 0; i < 5; ++i) {
                 this->registration[i] = a.registration[i];
             }
-            delete[] this->name;
-            this->name = new char[strlen(a.name) + 1];
-            strcpy(this->name, a.name);
         }
         return *this;
+    }
+
+    friend ostream &operator<<(ostream &out, const Automobile &a) {
+        out << "Marka\t" << a.name << "\tRegistracija[ ";
+        for (int i = 0; i < 5; ++i) {
+            out << a.registration[i] << " ";
+        }
+        out << "]" << endl;
+        return out;
     }
 
     bool operator==(const Automobile &a) {
@@ -62,95 +71,98 @@ public:
         return true;
     }
 
-    friend ostream &operator<<(ostream &out, const Automobile &a) {
-
-        out << "Marka\t" << a.name << "\tRegistracija[ ";
-        for (int i = 0; i < 5; ++i) {
-            out << a.registration[i] << " ";
-        }
-        out << "]" << endl;
-        return out;
+    const int getMaxSpeed() {
+        return maxSpeed;
     }
 
     ~Automobile() {
         delete[] name;
         delete[] registration;
     }
-
-    const int getMaxSpeed() {
-        return maxSpeed;
-    }
 };
 
 class RentACar {
 private:
     char name[100];
-    Automobile *car;
+    Automobile *cars;
     int num_cars;
 public:
-    RentACar(char *name) {
+    RentACar(const char *name) {
         strcpy(this->name, name);
+        this->cars = NULL;
         this->num_cars = 0;
-        this->car = new Automobile[this->num_cars];
     }
 
     RentACar(const RentACar &agency) {
-        strcpy(this->name, agency.name);
         this->num_cars = agency.num_cars;
-        this->car = new Automobile[agency.num_cars];
+        strcpy(this->name, agency.name);
+        this->cars = new Automobile[agency.num_cars];
         for (int i = 0; i < agency.num_cars; ++i) {
-            this->car[i] = agency.car[i];
+            this->cars[i] = agency.cars[i];
         }
     }
 
     RentACar &operator=(const RentACar &agency) {
         if (this != &agency) {
-            strcpy(this->name, agency.name);
             this->num_cars = agency.num_cars;
-            delete[] this->car;
-            this->car = new Automobile[agency.num_cars];
+            strcpy(this->name, agency.name);
+            delete[] this->cars;
+            this->cars = new Automobile[agency.num_cars];
             for (int i = 0; i < agency.num_cars; ++i) {
-                this->car[i] = agency.car[i];
+                this->cars[i] = agency.cars[i];
             }
         }
         return *this;
     }
 
     RentACar &operator+=(const Automobile &a) {
-        Automobile *temp = new Automobile[num_cars + 1];
+        Automobile *tmp = new Automobile[num_cars + 1];
         for (int i = 0; i < num_cars; ++i) {
-            temp[i] = car[i];
+            tmp[i] = cars[i];
         }
-        delete[] car;
-        car = temp;
-        car[num_cars++] = a;
+        delete[] cars;
+        cars = tmp;
+        cars[num_cars++] = a;
         return *this;
     }
 
-    RentACar &operator-=(Automobile &a) {
-        int newLength = 0;
-        Automobile *tmp = new Automobile[num_cars - 1];
-        for (int i = 0, j = 0; i < num_cars; ++i) {
-            if (!(this->car[i] == a)) {
-                tmp[j++] = this->car[i];
-                newLength++;
+    RentACar &operator-=(const Automobile &a) {
+        int newSize = 0;
+        bool flag = true;  // used as an indicator if there is a car that has to be removed.
+        for (int i = 0; i < num_cars; ++i) {
+            if (!(cars[i] == a))
+                flag = false;
+            else {
+                flag = true;
+                break;
             }
         }
-        delete[] this->car;
-        this->car = tmp;
-        num_cars = newLength;
+        /* if the flag is true, there is a car that has to be removed
+         otherwise return the same object. */
+        if (flag) {
+            Automobile *tmp = new Automobile[num_cars - 1];
+            for (int i = 0, j = 0; i < num_cars; ++i) {
+                if (!(cars[i] == a)) {
+                    tmp[j++] = cars[i];
+                    ++newSize;
+                }
+            }
+            delete[] cars;
+            cars = tmp;
+            num_cars = newSize;
+        }
         return *this;
     }
 
-    ~RentACar() { delete[] car; }
-
-    void pecatiNadBrzina(int max) {
+    void pecatiNadBrzina(const int max) {
         cout << name << endl;
         for (int i = 0; i < num_cars; ++i) {
-            if (car[i].getMaxSpeed() > max)
-                cout << car[i];
+            if (cars[i].getMaxSpeed() > max)
+                cout << cars[i];
         }
     }
+
+    ~RentACar() { delete[] cars; }
 };
 
 int main() {
