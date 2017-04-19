@@ -5,36 +5,33 @@
 
 using namespace std;
 
-class Krug {
+lass Krug {
 private:
-    float radius;
-    const float Pi = 3.14;
+    float r;
+    const float PI;
 public:
-    Krug() {
-        radius = 0;
+    Krug() : PI(3.14) { 
+        r = 0;
     }
 
-    Krug(float r) {
-        radius = r;
+    Krug(float r) : PI(3.14) { 
+        this->r = r;
     }
 
-    ~Krug() {
+    ~Krug() {}
 
+    const float perimetar() {
+        return 2 * r * PI;
     }
 
-    float const perimetar() {
-        return 2 * radius * Pi;
+    const float plostina() {
+        return r * r * PI;
     }
 
-    float const plostina() {
-        return radius * radius * Pi;
-    }
-
-    int ednakvi() {
+    bool ednakvi() {
         if (perimetar() == plostina())
-            return 1;
-        else
-            return 0;
+            return true;
+        return false;
     }
 };
 
