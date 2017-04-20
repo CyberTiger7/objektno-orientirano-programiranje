@@ -44,15 +44,15 @@ public:
         return in;
     }
 
-    void pecati() {
+    const void pecati() {
         cout << address << ", Kvadratura: " << squareSurface << ", Cena po Kvadrat: " << price << endl;
     }
 
-    int cena() {
+    const int cena() {
         return squareSurface * price;
     }
 
-    float danokNaImot() {
+    const float danokNaImot() {
         return (5 / float(100)) * cena();
     }
 
@@ -81,12 +81,12 @@ public:
         return in;
     }
 
-    void pecati() {
-        cout << address << ", Kvadratura: " << squareSurface << ", Cena po Kvadrat: "
-             << price << ", Danok na luksuz: " << luxuryCustom << endl;
+    const void pecati() {
+        cout << address << ", Kvadratura: " << squareSurface << ", Cena po Kvadrat: " << price << ", Danok na luksuz: "
+             << luxuryCustom << endl;
     }
 
-    float danokNaImot() {
+    const float danokNaImot() {
         return (luxuryCustom / float(100)) * cena() + Nedviznina::danokNaImot();
     }
 };
