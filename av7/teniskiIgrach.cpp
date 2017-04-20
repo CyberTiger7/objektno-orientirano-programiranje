@@ -34,7 +34,7 @@ public:
     }
 
     friend ostream &operator<<(ostream &out, const TennisPlayer &tp) {
-        if (tp.playsInLeague == true)
+        if (tp.playsInLeague)
             return out << tp.name << " " << tp.surname << ", igra vo liga";
         else
             return out << tp.name << " " << tp.surname << ", ne igra vo liga";
@@ -58,8 +58,12 @@ public:
         this->rank = rank;
     }
 
-    RankedTennisPlayer(const TennisPlayer &rtp, int rank) : TennisPlayer(rtp) {
+    RankedTennisPlayer(const TennisPlayer &tp, int rank) : TennisPlayer(tp) {
         this->rank = rank;
+    }
+
+    RankedTennisPlayer(const RankedTennisPlayer &rtp) : TennisPlayer(rtp) {
+    	this->rank = rtp.rank;
     }
 
     friend ostream &operator<<(ostream &out, const RankedTennisPlayer &rtp) {
@@ -81,5 +85,7 @@ int main() {
     //RankedTennisPlayer copy(tp);
     RankedTennisPlayer copy(ng, 3320);
     cout << copy << endl;
+    RankedTennisPlayer copy1 = rn;
+    cout << copy1 << endl;
     return 0;
 }
