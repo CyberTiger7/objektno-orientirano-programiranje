@@ -127,9 +127,6 @@ public:
     ParkingPlac &operator=(const ParkingPlac &pp) {
         if (this != &pp) {
             this->num_vehicles = pp.num_vehicles;
-            for (int i = 0; i < num_vehicles; ++i) {
-                delete this->p[i];
-            }
             delete[] this->p;
             this->p = new Vozilo *[pp.num_vehicles];
             for (int i = 0; i < pp.num_vehicles; ++i) {
