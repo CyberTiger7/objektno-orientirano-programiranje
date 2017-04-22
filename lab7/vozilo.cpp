@@ -143,11 +143,11 @@ public:
     }
 
     const float presmetajVkupnaMasa() {
-        float total_weigth = 0.0;
+        float total_weight = 0.0;
         for (int i = 0; i < num_vehicles; ++i) {
-            total_weigth += p[i]->getWeight();
+            total_weight += p[i]->getWeight();
         }
-        return total_weigth;
+        return total_weight;
     }
 
     int brojVozilaPoshirokiOd(int l) {
