@@ -30,6 +30,8 @@ public:
     const int getWidth() {
         return width;
     }
+
+    virtual ~Vozilo() {}
 };
 
 class Avtomobil : public Vozilo {
@@ -110,7 +112,7 @@ private:
     int num_vehicles;
 public:
     ParkingPlac() {
-        this->p = new Vozilo *[100];
+        this->p = NULL;
         this->num_vehicles = 0;
     }
 
@@ -138,6 +140,12 @@ public:
     }
 
     ParkingPlac &operator+=(Vozilo *v) {
+        Vozilo **tmp = new Vozilo *[num_vehicles + 1];
+        for (int i = 0; i < num_vehicles; ++i) {
+            tmp[i] = p[i];
+        }
+        delete[] p;
+        p = tmp;
         p[num_vehicles++] = v;
         return *this;
     }
