@@ -101,7 +101,6 @@ void pecatiPoloshiPonudi(Transport **ponudi, int n, Transport &t) {
         cout << tmp[i]->getDestination() << " " << tmp[i]->getDestinationLength() << " " <<
              tmp[i]->cenaTransport() << endl;
     }
-    //cout << tmp[0] << endl;
 }
 
 int main() {
