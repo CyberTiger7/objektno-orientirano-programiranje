@@ -97,14 +97,12 @@ public:
 
 Nedviznost &najskap_imot(Nedviznost **ned, int n) {
     Nedviznost *max = ned[0];
-    int maxIndex = 0;
     for (int i = 1; i < n; ++i) {
         if (*max < *ned[i]) {
             max = ned[i];
-            maxIndex = i;
         }
     }
-    return *ned[maxIndex];
+    return *max;
 }
 
 int main() {
