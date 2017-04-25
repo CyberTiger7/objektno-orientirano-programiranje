@@ -70,7 +70,7 @@ public:
             this->price_per_season[i] = 0;
         }
         this->Class = 'F';
-        this->ima_zicara = 1;
+        this->ima_zicara = false;
         this->zichara = NULL;
     }
 
@@ -80,7 +80,7 @@ public:
             this->price_per_season[i] = price_per_season[i];
         }
         this->Class = Class;
-        this->ima_zicara = 0;
+        this->ima_zicara = false;
         this->zichara = NULL;
     }
 
@@ -90,12 +90,13 @@ public:
         for (int i = 0; i < 2; ++i) {
             this->price_per_season[i] = pd.price_per_season[i];
         }
-        if (pd.zichara == NULL) {
-            this->zichara = NULL;
-            this->ima_zicara = 0;
-        } else {
-            this->ima_zicara = 1;
+        if (pd.ima_zicara) {
+            this->ima_zicara = true;
             this->zichara = new Zichara(pd.zichara->getPlace(), pd.zichara->getPrice());
+
+        } else {
+            this->ima_zicara = false;
+            this->zichara = NULL;
         }
     }
 
@@ -107,21 +108,22 @@ public:
                 this->price_per_season[i] = pd.price_per_season[i];
             }
             delete this->zichara;
-            if (pd.zichara == NULL) {
-                this->ima_zicara = 0;
-                this->zichara = NULL;
-            } else {
-                this->ima_zicara = 1;
+            if (pd.ima_zicara) {
+                this->ima_zicara = true;
                 this->zichara = new Zichara(pd.zichara->getPlace(), pd.zichara->getPrice());
+
+            } else {
+                this->ima_zicara = false;
+                this->zichara = NULL;
             }
         }
         return *this;
     }
 
     friend ostream &operator<<(ostream &out, const PlaninarskiDom &pd) {
-        if (pd.ima_zicara) {
+        if (pd.ima_zicara)
             out << pd.name << " klasa:" << pd.Class << " so Zichara" << endl;
-        } else
+        else
             out << pd.name << " klasa:" << pd.Class << endl;
         return out;
     }
@@ -140,6 +142,7 @@ public:
 
 
     void setZichara(Zichara &r) {
+        this->ima_zicara = true;
         this->zichara = new Zichara(r.getPlace(), r.getPrice());
     }
 
