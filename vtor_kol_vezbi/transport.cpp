@@ -18,7 +18,7 @@ public:
         this->destination_length = destination_length;
     }
 
-    virtual const int cenaTransport() = 0;
+    virtual const int cenaTransport() const = 0;
 
     bool operator<(const Transport &t) {
         return destination_length < t.destination_length;
@@ -28,11 +28,11 @@ public:
         return price;
     }
 
-    const char *getDestination() {
+    const char *getDestination() const {
         return destination;
     }
 
-    const int getDestinationLength() {
+    const int getDestinationLength() const {
         return destination_length;
     }
 
@@ -49,7 +49,7 @@ public:
         this->paidDriver = paidDriver;
     }
 
-    const int cenaTransport() {
+    const int cenaTransport() const {
         if (paidDriver)
             return price + (20 / float(100)) * price;
         return price;
@@ -66,7 +66,7 @@ public:
         this->num_people = num_people;
     }
 
-    const int cenaTransport() {
+    const int cenaTransport() const {
         return price - (num_people * 200);
     }
 };
@@ -74,16 +74,13 @@ public:
 void pecatiPoloshiPonudi(Transport **ponudi, int n, Transport &t) {
     Transport *tmp[n];
     int newLength = 0;
-
     for (int i = 0, j = 0; i < n; ++i) {
         if (ponudi[i]->cenaTransport() > t.cenaTransport()) {
             tmp[j++] = ponudi[i];
             ++newLength;
         }
     }
-
     n = newLength;
-
     if (n != 1) {
         Transport *temporary[n];
         for (int i = 0; i < n - 1; ++i) {
@@ -96,7 +93,6 @@ void pecatiPoloshiPonudi(Transport **ponudi, int n, Transport &t) {
             }
         }
     }
-
     for (int i = 0; i < n; ++i) {
         cout << tmp[i]->getDestination() << " " << tmp[i]->getDestinationLength() << " " <<
              tmp[i]->cenaTransport() << endl;
