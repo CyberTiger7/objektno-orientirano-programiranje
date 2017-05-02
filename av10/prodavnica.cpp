@@ -51,8 +51,8 @@ public:
     virtual ~Discount() {}
 };
 
-float Discount::euro = 61.7;
-float Discount::dollar = 44.5;
+float Discount::euro = 61.6;
+float Discount::dollar = 56.4;
 
 class Product {
 protected:
