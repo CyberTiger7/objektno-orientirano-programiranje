@@ -6,11 +6,11 @@
 
 using namespace std;
 
-class NegativeValueException : public exception {
+class NegativeValueException {
 private:
     char *errorName;
 public:
-    NegativeValueException(const char *errorName) : exception() {
+    NegativeValueException(const char *errorName) {
         this->errorName = new char[strlen(errorName) + 1];
         strcpy(this->errorName, errorName);
     }
