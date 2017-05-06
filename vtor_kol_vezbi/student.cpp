@@ -95,6 +95,7 @@ public:
             : StudentKurs(sk.getName(), sk.ocenka()) {
         this->descriptiveGrade = new char[strlen(descriptiveGrade) + 1];
         strcpy(this->descriptiveGrade, descriptiveGrade);
+        this->daliUsno = true;
     }
 
     StudentKursUsno &operator=(const StudentKursUsno &sku) {
