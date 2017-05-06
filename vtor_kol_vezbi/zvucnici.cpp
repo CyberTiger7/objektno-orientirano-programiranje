@@ -134,7 +134,6 @@ int main() {
         cin >> fullSemi;
         MonitorSpeaker ms(power, model, amp, price, fullSemi);
         cout << ms << endl;
-
     } else if (testCase == 2) {
         cout << "===== TESTING LOWEST PRICE ======" << endl;
         int n;
@@ -151,7 +150,6 @@ int main() {
             else
                 speakers[i] = new MonitorSpeaker(power, model, amp, price, fullSemi);
         }
-
         lowestPrice(speakers, n);
         for (int i = 0; i < n; ++i) {
             delete speakers[i];
