@@ -17,14 +17,14 @@ public:
 
     BadInputException(const BadInputException &e) {
         this->errorMsg = new char[strlen(e.errorMsg) + 1];
-        strcpy(this->errorMsg, errorMsg);
+        strcpy(this->errorMsg, e.errorMsg);
     }
 
     BadInputException &operator=(const BadInputException &e) {
         if (this != &e) {
             delete[] this->errorMsg;
             this->errorMsg = new char[strlen(e.errorMsg) + 1];
-            strcpy(this->errorMsg, errorMsg);
+            strcpy(this->errorMsg, e.errorMsg);
         }
         return *this;
     }
