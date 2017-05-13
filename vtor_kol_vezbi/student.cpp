@@ -52,7 +52,7 @@ public:
 
     //дополни ја класата
     friend ostream &operator<<(ostream &out, const StudentKurs &sk) {
-        return out << sk.name << " --- " << sk.grade << endl;
+        return out << sk.name << " --- " << sk.ocenka() << endl;
     }
 
     static const void setMAX(const int m) {
@@ -68,7 +68,7 @@ public:
     }
 
     const bool havePassed() const {
-        return grade >= MINGRADE;
+        return ocenka() >= MINGRADE;
     }
 
     const char *getName() const {
@@ -123,12 +123,18 @@ public:
     }
 
     const int ocenka() const {
-        if (strcmp(descriptiveGrade, "odlicen") == 0)
-            return grade + 2;
-        else if (strcmp(descriptiveGrade, "dobro") == 0)
-            return grade + 1;
-        else if (strcmp(descriptiveGrade, "losho") == 0)
-            return grade - 1;
+        if (strcmp(descriptiveGrade, "odlicen") == 0) {
+            if(grade + 2 <= MAX)
+                return grade + 2;
+        }
+        else if (strcmp(descriptiveGrade, "dobro") == 0) {
+            if(grade + 1 <= MAX)
+                return grade + 1;
+        }
+        else if (strcmp(descriptiveGrade, "losho") == 0) {
+            if(grade - 1 >= MINGRADE)
+                return grade - 1;
+        }
         return grade;
     }
 
@@ -166,13 +172,6 @@ public:
     }
 
     const void pecatiStudenti() const {
-        for (int i = 0; i < num_students; ++i) {
-            if (students[i]->getDaliUsno()) {
-                StudentKursUsno *tmp = dynamic_cast<StudentKursUsno *>(students[i]);
-                tmp->setGrade(tmp->ocenka());
-            }
-        }
-
         cout << "Kursot " << name << " go polozile:" << endl;
         for (int i = 0; i < num_students; ++i) {
             if (students[i]->havePassed())
