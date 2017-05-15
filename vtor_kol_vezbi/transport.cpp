@@ -81,15 +81,13 @@ void pecatiPoloshiPonudi(Transport **ponudi, int n, Transport &t) {
         }
     }
     n = newLength;
-    if (n != 1) {
-        Transport *temporary[n];
-        for (int i = 0; i < n - 1; ++i) {
-            for (int j = 0; j < n - i - 1; ++j) {
-                if (!(*tmp[j] < *tmp[j + 1])) {
-                    temporary[j] = tmp[j];
-                    tmp[j] = tmp[j + 1];
-                    tmp[j + 1] = temporary[j];
-                }
+    Transport *temporary[n];
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (!(*tmp[j] < *tmp[j + 1])) {
+                temporary[j] = tmp[j];
+                tmp[j] = tmp[j + 1];
+                tmp[j + 1] = temporary[j];
             }
         }
     }
