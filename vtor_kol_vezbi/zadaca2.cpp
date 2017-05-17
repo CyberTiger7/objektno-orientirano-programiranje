@@ -42,7 +42,7 @@ private:
     int year;
 public:
     Trud(const char type = 'C', const int year = 0) {
-        this->type = toupper(type);
+        this->type = char(toupper(type));
         this->year = year;
     }
 
