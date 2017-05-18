@@ -72,28 +72,38 @@ public:
 };
 
 void pecatiPoloshiPonudi(Transport **ponudi, int n, Transport &t) {
-    Transport *tmp[n];
+    Transport **newOffers = NULL;
     int newLength = 0;
     for (int i = 0, j = 0; i < n; ++i) {
         if (ponudi[i]->cenaTransport() > t.cenaTransport()) {
-            tmp[j++] = ponudi[i];
+            if (j == 0) {
+                newOffers = new Transport *[j + 1];
+                newOffers[j++] = ponudi[i];
+            } else {
+                Transport **old = new Transport *[j + 1];
+                for (int k = 0; k < j; ++k) {
+                    old[k] = newOffers[k];
+                }
+                delete[] newOffers;
+                newOffers = old;
+                newOffers[j++] = ponudi[i];
+            }
             ++newLength;
         }
     }
     n = newLength;
-    Transport *temporary[n];
     for (int i = 0; i < n - 1; ++i) {
         for (int j = 0; j < n - i - 1; ++j) {
-            if (!(*tmp[j] < *tmp[j + 1])) {
-                temporary[j] = tmp[j];
-                tmp[j] = tmp[j + 1];
-                tmp[j + 1] = temporary[j];
+            if (!(*newOffers[j] < *newOffers[j + 1])) {
+                Transport *tmp = newOffers[j];
+                newOffers[j] = newOffers[j + 1];
+                newOffers[j + 1] = tmp;
             }
         }
     }
     for (int i = 0; i < n; ++i) {
-        cout << tmp[i]->getDestination() << " " << tmp[i]->getDestinationLength() << " " <<
-             tmp[i]->cenaTransport() << endl;
+        cout << newOffers[i]->getDestination() << " " << newOffers[i]->getDestinationLength() << " " <<
+             newOffers[i]->cenaTransport() << endl;
     }
 }
 
